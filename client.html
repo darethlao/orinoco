@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr-FR">
+
     <head>
         <!-- meta tags obligatoires -->
         <meta charset="utf-8">
@@ -8,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- titre et description -->
         <title>Orinoco - Oribear l'univers des ours en peluche</title>
-        <meta name="description" content="Tous nos ours en peluche sont faits à la main et personnalisable">
+        <meta name="description" content="Tous nos ours en peluche sont faits à la main et personnalisable" />
         <!-- comptaibilité IE Edge -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- meta robots -->
@@ -16,9 +17,10 @@
         <!-- keywords-->
         <meta name="keywords" content="ours, ourson, mignon, peluche, animal en peluche, animaux en peluche, doux, Teddy, Teddy l'ourson">
         <!-- liens vers des ressources externes -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- NB : J'utilise sass en attendant-->
+        <link rel="stylesheet" type="text/css" href="sass/style.scss">
         <!-- icone favorite -->
-        <link rel="icon" type="image/png" href="favicon.jpg">
+        <link rel="shortcut icon" type="image/png" href="favicon.jpg">
         <!-- Twitter Card data pour partage de contenu sur Twitter -->
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Orinoco - Oribear l'univers des rous en peluche" />
@@ -33,6 +35,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                    
     </head>
 
     <body>
@@ -68,70 +71,87 @@
             </div>
             <!--header - bloc-0 END -->
 
-            <!-- produits - bloc-1 -->
+            <!-- commande - bloc-1 -->
+            <div class="row text-center">
+                <div class="col">
+                    <h5>Pour confirmer ma commande, je complète ce formulaire</h5>
+                    <BR/>
+                </div>
+            </div>
+            <!-- civilité-->
+            <div class="row mx-auto">
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <label for="exampleInputEmail1">Civilité
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 text-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Monsieur
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 text-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Madame
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- Nom -->
+            <div class="row mx-auto">
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <label for="exampleInputEmail1">Nom
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="form-check">
+                        <div class="card">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer votre nom">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="form-check">
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <label for="exampleInputEmail1">Nom
+                    </label>
+                </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <input type="text" class="form-control" id="entrer_mon_nom" aria-describedby="nomHelp" placeholder="Entrer votre email">
+                        <small id="nomHelp" class="form-text text-muted">Nous ne partagerons jamais votre email avec quiconque.</small>
+                    </div>
+                </div>
+            <!-- bouton de validation des coordonnées-->
             <div class="row">
-                <!-- spécificité produits -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center pt-5" style="background:rgb(243, 233, 241);">
-                            <h2 class="card-text font-italic">Tous nos ours <BR/>en peluche sont <BR/>faits à la main et <strong><BR/>personnalisables</strong>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <!-- ours norbert -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="background:rgb(243, 233, 241);">
-                            <a class="ourson_norbert" href="ours_norbert.html">
-                                <img src="images/teddy_1.jpg" alt="Norbert" height="200" >
-                            </a>
-                            <h3 class="card-title"></h3>
-                        </div>
-                    </div>
-                </div>
-                 <!-- ours toumignon -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="background:rgb(243, 233, 241);">
-                            <a class="ourson_arnold" href="ours_arnold.html">
-                                <img src="images/teddy_2.jpg" alt="Arnold" height="200">
-                            </a>
-                            <h3 class="card-title">Arnold</h3>
-                        </div>
-                    </div>
-                </div>
-                 <!-- ours toucalin -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="background:rgb(243, 233, 241);">
-                            <a class="ourson_lenny_carl" href="ours_lenny_carl.html">
-                                <img src="images/teddy_3.jpg" alt="Lenny & Carl" height="200">
-                            </a>
-                            <h3 class="card-title">Lenny & Carl</h3>
-                        </div>
-                    </div>
-                </div>
-                 <!-- ours toubigentil -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="background:rgb(243, 233, 241);">
-                            <a class="ourson_gustav" href="ours_gustav.html">
-                                <img src="images/teddy_4.jpg" alt="Gustav" height="200">
-                            </a>
-                            <h3 class="card-title">Gustav</h3>
-                        </div>
-                    </div>
-                </div>
-                 <!-- ours touseul -->
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body text-center" style="background:rgb(243, 233, 241);">
-                            <a class="ourson_garfunkel" href="ours_garfunkel.html">
-                                <img src="images/teddy_5.jpg" alt="Garfunkel" height="200">
-                            </a>
-                            <h3 class="card-title">Garfunkel</h3>
-                        </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <button type="submit" class="btn btn-primary">Je valide mes coordonnées</button>                     </div>
                     </div>
                 </div>
             </div>
@@ -162,4 +182,3 @@
     </body>
 
 </html>
-
