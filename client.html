@@ -71,7 +71,7 @@
             </div>
             <!--header - bloc-0 END -->
 
-            <!-- commande - bloc-1 -->
+            <!-- coordonnées du client - bloc-1 -->
             <div class="row text-center">
                 <div class="col">
                     <h5>Pour confirmer ma commande, je complète ce formulaire</h5>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Nom -->
+            <!-- nom du client -->
             <div class="row mx-auto">
                 <div class="col-12 col-lg-3">
                     <div class="card">
@@ -115,14 +115,14 @@
                 </div>
                 <div class="col-12 col-lg-1 text-center">
                     <div class="card">
-                        <label for="exampleInputEmail1">Nom
+                        <label for="nom_du_client">Nom
                         </label>
                     </div>
                 </div>
                 <div class="col-12 col-lg-5 text-center">
                     <div class="form-check">
                         <div class="card">
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer votre nom">
+                            <input type="text" class="form-control" id="entrer_votre_nom" aria-describedby="nom_du_client" placeholder="Entrer votre nom">
                         </div>
                     </div>
                 </div>
@@ -131,27 +131,109 @@
                     </div>
                 </div>
             </div>
+            <!-- prénom du client -->
             <div class="row mx-auto">
                 <div class="col-12 col-lg-3">
                     <div class="card">
                     </div>
                 </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <label for="prenom_du_client">Prénom
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="form-check">
+                        <div class="card">
+                            <input type="text" class="form-control" id="entrer_votre_prenom" aria-describedby="prenom_du_client" placeholder="Entrer votre prénom">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="form-check">
+                    </div>
+                </div>
+            </div>
+            <!-- email du client -->
+            <div class="row mx-auto">
                 <div class="col-12 col-lg-3">
-                    <label for="exampleInputEmail1">Nom
-                    </label>
+                    <div class="card">
+                    </div>
                 </div>
                 <div class="col-12 col-lg-1 text-center">
                     <div class="card">
-                        <input type="text" class="form-control" id="entrer_mon_nom" aria-describedby="nomHelp" placeholder="Entrer votre email">
-                        <small id="nomHelp" class="form-text text-muted">Nous ne partagerons jamais votre email avec quiconque.</small>
+                        <label for="email_du_client">Email
+                        </label>
                     </div>
                 </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="form-check">
+                        <div class="card">
+                            <input type="email" class="form-control" id="entrer_votre_email" aria-describedby="email_du_client" placeholder="Entrer votre email">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="form-check">
+                    </div>
+                </div>
+            </div>
+            <!-- adresse du client -->
+            <div class="row mx-auto">
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <label for="adresse_du_client">Adresse
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="form-check">
+                        <div class="card">
+                            <input type="text" class="form-control" id="entrer_votre_adresse" aria-describedby="adresse_du_client" placeholder="Entrer votre adresse">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="form-check">
+                    </div>
+                </div>
+            </div>
+            <!-- ville du client -->
+            <div class="row mx-auto">
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-1 text-center">
+                    <div class="card">
+                        <label for="ville_du_client">Ville
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="form-check">
+                        <div class="card">
+                            <input type="text" class="form-control" id="entrer_votre_ville" aria-describedby="ville_du_client" placeholder="Entrer votre ville">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="form-check">
+                    </div>
+                </div>
+            </div>
             <!-- bouton de validation des coordonnées-->
             <div class="row">
                 <div class="col">
                     <div class="card h-100">
-                        <div class="card-body text-center">
-                            <button type="submit" class="btn btn-primary">Je valide mes coordonnées</button>                     </div>
+                        <div class="card-body text-center">  
+                            <a href="confirmation.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Je valide mes coordonnées</a>
+                        </div>
                     </div>
                 </div>
             </div>
