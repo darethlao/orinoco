@@ -30,7 +30,7 @@ fetch("http://localhost:3000/api/teddies/")
       let prototype = '<div class="col-12 col-lg-4">\
       <div class="card">\
           <div class="card-body text-center" style="background:rgb(243, 233, 241);">\
-              <a class="articles" href="produit.html" onclick="window.open(this.href)">\
+              <a class="articles" href="produit.html?id=' + articles._id +'">\
                   <img src="' + articles.imageUrl + '" height="200" >\
               </a>\
               <h3 class="card-title">' + articles.name + '</h3>\
