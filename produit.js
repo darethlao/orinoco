@@ -60,33 +60,33 @@ let articleSelectionne2 = document.querySelector("#bloc-articles2");
 console.log(articleSelectionne2);
 
 // Code HTML pour l'affichage de l'article sélectionné
-let prototype2 = ' <div class="col-12 col-lg-3">\
-                        <div class="card">\
-                        </div>\
-                    </div>\
-                    <div class="col-12 col-lg-3">\
-                        <div class="card h-100">\
-                            <div class="card-body text-center">\
-                                <h5>Je personnalise sa couleur\
-                                </h5>\
-                                <form>\
-                                    <select id="couleurs" size="1">\
-                                    </select>\
-                                </form>\
-                            </div>\
-                        </div>\
-                    </div>\
-                    <div class="col-12 col-lg-3">\
-                        <div class="card h-100">\
-                            <div id="btn-envoyer" class="card-body text-center">\
-                                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Je mets dans mon panier</a>\
-                            </div>\
-                        </div>\
-                    </div>\
-                    <div class="col-12 col-lg-3">\
-                        <div class="card">\
-                        </div>\
-                    </div>';
+let prototype2 = ` <div class="col-12 col-lg-3">
+                        <div class="card">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5>Je personnalise sa couleur
+                                </h5>
+                                <form>
+                                    <select id="couleurs" size="1">
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card h-100">
+                            <div id="btn-envoyer" class="card-body text-center">
+                                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Je mets dans mon panier</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card">
+                        </div>
+                    </div>`;
 
 
 // Injecter la code HTML dans produit.html
@@ -97,7 +97,7 @@ let nombreOptions = idArticleSelectionne.colors;
 let structureOptions = [];
 console.log(nombreOptions);
 // Faire la boucle for pour afficher le nombre d'options
-for ( let i = 0; i < nombreOptions.length; i++) {
+for (let i = 0; i < nombreOptions.length; i++) {
      structureOptions = structureOptions +
      '<option> ' + nombreOptions[i] + ' </option>';
 }
@@ -148,7 +148,7 @@ let popupConfirmation = () =>{
     }
 }
 
-// S'il y a des artiles stockés dans LocalStorage
+// S'il y a des artiles stockés dans LocalStorageyy
 if(articleStockeDansLocalstorage){
     articleStockeDansLocalstorage.push(articlePanier);
     localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage))

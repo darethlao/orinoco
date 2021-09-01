@@ -1,3 +1,40 @@
+@import "_et-line.scss";
+@import "_font-awesome.scss";
+
+// Prendre toute la hauteur et la largeur de 'élément dans son ensemble
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+// Supprimer les marges des colonnes Bootstrap
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+// Rendre visible l'icône de navigation
+.navbar-light .navbar-toggler {
+  color: black;
+  border-color: rgb(243, 233, 241);
+}
+// Centrer les menus "Accueil" et "Panier" pour la responsive
+#navbarContent {
+  justify-content: center;
+}
+
+// Footer
+#bloc-2 {
+  color: #FFFFFF !important;
+  font-size: 1rem;
+  padding-top: 10px;
+  padding-bottom: 20px;
+    .icon-md{
+      color: #FFFFFF !important;
+      font-size: 30px;
+  }
 }
