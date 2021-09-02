@@ -8,58 +8,119 @@ console.log(articleSelectionne3);
 
 // Afficher si le panier est vide
 if (articleStockeDansLocalstorage === null) {
-let panierVide = '<div class="container-panier-vide">\
-    <p> Mon panier est vide </p>\
+let panierVide = '<div class="container-panier-vide my-4">\
+    <h4 style="color: red; text-align: center"> Mon panier est vide :( </h4>\
 </div>\
 ';
 articleSelectionne3.innerHTML = panierVide;
+
 // Afficher les articles sélectionnés si le panier n'est pas vide
 } else {
     structureArticlesDansPanier = [];
     for (let j = 0; j < articleStockeDansLocalstorage.length; j++) {
         structureArticlesDansPanier = structureArticlesDansPanier + `
-        <div class="col-12 col-lg-3">
-            <div class="card">
-                <div class="card-body text-center">   
-                    <h5><strong>${articleStockeDansLocalstorage[j].modele}</strong>
-                    ${articleStockeDansLocalstorage[j].couleur}
-                    ${articleStockeDansLocalstorage[j].quantit}
-                    ${articleStockeDansLocalstorage[j].prix / 100} €
-                    </h5>
-                </div>
+        <div class="row">
+            <div class="col-4 md-1">
+            </div>
+            <div class="col bg-white">
+                <strong>${articleStockeDansLocalstorage[j].modele}</strong>
+            </div>
+            <div class="col bg-white">
+                ${articleStockeDansLocalstorage[j].couleur}
+            </div>
+            <div class="col bg-white text-center">
+                ${articleStockeDansLocalstorage[j].quantit}
+            </div>
+            <div class="col bg-white text-center">    
+                ${articleStockeDansLocalstorage[j].prix} €
+            </div>
+            <div class="col-4  md-1">
             </div>
         </div>
     `;
     }
-// Injecter la code HTML dans panier.html
-articleSelectionne3.innerHTML = structureArticlesDansPanier;
+    // Injecter la code HTML dans panier.html
+    articleSelectionne3.innerHTML = structureArticlesDansPanier;
 }
 
+// Afficher le total des quantités commandées et des prix
+let articleSelectionne4 = document.querySelector("#total-commande");
+// Calculer le total des quantités commandées
+let totalQuantite = []
+for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
+let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantit;
+totalQuantite.push(quantiteArticlesDansPanier)
+}
+let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
+let calculQuantiteTotal = totalQuantite.reduce(quantites);
+console.log(calculQuantiteTotal);
+// Calculer le total des prix
+let totalPrix = []
+for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
+let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
+totalPrix.push(prixArticlesDansPanier)
+}
+let prix = (accumulator, currentvalue) => accumulator + currentvalue;
+let calculPrixTotal = totalPrix.reduce(prix);
+console.log(calculPrixTotal);
+let totalCommande = `<div id="bloc-libelle-panier" class="col">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col bg-white">
+        </div>
+        <div class="col bg-white  py-4" style="text-decoration-line:underline">
+            <strong>TOTAL</strong>
+        </div>
+        <div class="col bg-white text-center py-4">
+        <h5>${calculQuantiteTotal}</h5>
+        </div>
+        <div class="col bg-white text-center py-4">    
+            <h5>${calculPrixTotal}</h5>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+`;
+// Injecter la code HTML dans panier.html
+articleSelectionne4.innerHTML=totalCommande;
+
+
 // Sélectionner l'identifiant où je vais mettre le code HTML pour l'option couleur et le bouton
-let articleSelectionne4 = document.querySelector("#formulaire");
-console.log(articleSelectionne4);
+let articleSelectionne5 = document.querySelector("#formulaire");
+console.log(articleSelectionne5);
 
 // Créer le formulaire pour les coordonnées du client
-let prototype3 = `<div class="col">
-<div class="card">
-    <div class="card-body text-center">
+let prototype3 = `<!-- bouton de confirmation de commande-->
+<div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
+    <div class="col ">
+        <h5>Je complète le formulaire ci-dessous
+            <br/> avant de confirmer ma commande
+        </h5>
+    </div>
+</div>
+<div id="formulaire" class="row text-center">
+</div>
+<!-- Formulaire -->
+<div class="col" style="background:rgb(243, 233, 241);">
         <form>
             <select id="civilite">
                 <option value="0">Civilité</option>
                 <option value="1">Madame</option>
                 <option value="2">Monsieur</option>
             </select>
-            <input type="text" name="nom" placeholder="Mon nom" maxlenght="50" id="nom">
+            <input type="text" name="nom" placeholder="Mon nom" maxlength="50" id="nom">
             <br/>
-            <input type="text" name="prénom" placeholder="Mon prénom" maxlenght="50" id="prenom">
+            <input type="text" name="prénom" placeholder="Mon prénom" maxlength="50" id="prenom">
             <br/>
-            <input type="email" name="email" placeholder="Mon email" maxlenght="50" id="email">
+            <input type="email" name="email" placeholder="Mon email" maxlength="50" id="email">
             <br/>
-            <input type="text" name="adresse" placeholder="Mon adresse" maxlenght="50" id="adresse">
+            <input type="text" name="adresse" placeholder="Mon adresse" maxlength="50" id="adresse">
             <br/>
-            <input type="text" name="ville" placeholder="Ma ville" maxlenght="50" id="ville">
+            <input type="text" name="ville" placeholder="Ma ville" maxlength="50" id="ville">
             <br/>
-            <input type="submit" value="Je valide mes coordonnées" maxlenght="50">              
+            <input type="submit" value="Je confirme ma commande">              
         </form>
 
         <p style="color: red;" id="erreur"></p>
@@ -68,7 +129,7 @@ let prototype3 = `<div class="col">
 `;
 
 // Injecter la code HTML dans produit.html
-articleSelectionne4.innerHTML=prototype3;
+articleSelectionne5.innerHTML=prototype3;
 
 // Récupérer les coordonnées du client quand il clique sur le bouton "!je valide mes coordonnées" 
 document.getElementById("formulaire").addEventListener("submit", function(e) {
@@ -88,7 +149,7 @@ document.getElementById("formulaire").addEventListener("submit", function(e) {
         document.getElementById("erreur").innerHTML = erreur;
         return false;
     } else {
-        alert('Mon formulaire est envoyé !');
+        alert('Ma commande est validée !');
         
     }
 
