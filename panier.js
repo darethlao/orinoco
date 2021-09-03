@@ -8,11 +8,11 @@ console.log(articleSelectionne3);
 
 // Afficher si le panier est vide
 if (articleStockeDansLocalstorage === null) {
-let panierVide = '<div class="container-panier-vide my-4">\
-    <h4 style="color: red; text-align: center"> Mon panier est vide :( </h4>\
-</div>\
-';
-articleSelectionne3.innerHTML = panierVide;
+    let panierVide = '<div class="container-panier-vide my-4">\
+        <h4 style="color: red; text-align: center"> Mon panier est vide :( </h4>\
+    </div>\
+    ';
+    articleSelectionne3.innerHTML = panierVide;
 
 // Afficher les articles sélectionnés si le panier n'est pas vide
 } else {
@@ -51,18 +51,18 @@ let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
 let totalQuantite = []
 for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
-let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantit;
-totalQuantite.push(quantiteArticlesDansPanier)
-}
+    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantit;
+    totalQuantite.push(quantiteArticlesDansPanier)
+    }
 let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
 let calculQuantiteTotal = totalQuantite.reduce(quantites);
 console.log(calculQuantiteTotal);
 // Calculer le total des prix
 let totalPrix = []
 for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
-let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
-totalPrix.push(prixArticlesDansPanier)
-}
+    let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
+    totalPrix.push(prixArticlesDansPanier)
+    }
 let prix = (accumulator, currentvalue) => accumulator + currentvalue;
 let calculPrixTotal = totalPrix.reduce(prix);
 console.log(calculPrixTotal);

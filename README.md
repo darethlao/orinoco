@@ -1,17 +1,13 @@
 # Bienvenue sur Orinoco !
-=====================================
+[!logo orinoco.]
 Pour utiliser correctement l'API, veuillez suivre ces instructions :
 
-
 ## Prérequis
--------------------------------------
 * Téléchargez Node.js, ouvrez et placez vous sur le dossier d'installation du back-end.
 * Tapez la commande suivante : "npm start" (le serveur se lancera).
 * Allez à cette adresse : https://darethlao.github.io/orinoco/.
 
-
 ## Installation
-------------------------------------
 Clonez ce repository.
 Telechargez et ouvrez Node.js. 
 Tapez la commande suivante : "npm start".
