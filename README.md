@@ -1,5 +1,7 @@
 # Bienvenue sur Orinoco !
-[!logo orinoco.]
+
+![logo orinoco.](https://darethlao.github.io/orinoco/images/petit_logo_orinoco.png)
+
 Pour utiliser correctement l'API, veuillez suivre ces instructions :
 
 ## Prérequis
