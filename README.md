@@ -12,4 +12,4 @@ Vous avez besoin d'installer Node.js et npm localement sur votre pc.
 Le serveur doit fonctionner sur "localhost" avec le port par défaut "3000". 
 Si le serveur fonctionne sur un autre port pour divers raisons, la console l'indiquera au démarrage du serveur avec par exemple : "Listening on port 3001".
 
-Rendez-vous ensuite sur le site : https://darethlao.io/orinoco/.
+Rendez-vous ensuite sur le site : https://darethlao.github.io/orinoco/.
