@@ -43,6 +43,9 @@ articleSelectionne3.innerHTML = panierVide;
     articleSelectionne3.innerHTML = structureArticlesDansPanier;
 }
 
+// Créer un bouton suppression d'un article
+
+
 // Afficher le total des quantités commandées et des prix
 let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
@@ -76,7 +79,7 @@ let totalCommande = `<div id="bloc-libelle-panier" class="col">
         <h5>${calculQuantiteTotal}</h5>
         </div>
         <div class="col bg-white text-center py-4">    
-            <h5>${calculPrixTotal}</h5>
+            <h5>${calculPrixTotal} €</h5>
         </div>
         <div class="col-4">
         </div>

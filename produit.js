@@ -115,52 +115,52 @@ let mettreDansLePanier = document.querySelector("#btn-envoyer");
 // console.log(mettreDansLePanier);
 // Ecouter le click du bouton pour mettre l'article sélectionné dans le panier
 mettreDansLePanier.addEventListener("click", (event)=>{
-event.preventDefault();
+    event.preventDefault();
 
-// Récupérer la couleur choisie
-let couleurChoisie = document.querySelector("#couleurs");
-// Mettre la couleur choisie dans une variable
-let choixCouleur = couleurChoisie.value;
-console.log(choixCouleur);
+    // Récupérer la couleur choisie
+    let couleurChoisie = document.querySelector("#couleurs");
+    // Mettre la couleur choisie dans une variable
+    let choixCouleur = couleurChoisie.value;
+    console.log(choixCouleur);
 
-// Récupérer les données de l'article à mettre dans le panier
-let articlePanier = {
-    modele: idArticleSelectionne.name,
-    reference: idArticleSelectionne._id,
-    couleur: choixCouleur,
-    quantit: 1,
-    prix: idArticleSelectionne.price / 100
-}
-// Afficher les données de l'article sélectionné
-console.log(articlePanier);
-
-// ------------------------------Local Storage--------------------------------------
-// Stocker les données de l'article dans le localstorage avec JSON.parse
-let articleStockeDansLocalstorage = JSON.parse(localStorage.getItem("article"));
-
-// Créer un popup de confirmation
-let popupConfirmation = () =>{
-    if(window.confirm("'idArticleSelectionne.name' option: 'choixCouleur' a bien été mis dans le panier Consulter le panier OK ou revenir à laccueil ANNULER" )) {
-    window.location.href = "panier.html";
+    // Récupérer les données de l'article à mettre dans le panier
+    let articlePanier = {
+        modele: idArticleSelectionne.name,
+        reference: idArticleSelectionne._id,
+        couleur: choixCouleur,
+        quantit: 1,
+        prix: idArticleSelectionne.price / 100
     }
-    else {
-        window.location.href = "index.html";
-    }
-}
+    // Afficher les données de l'article sélectionné
+    console.log(articlePanier);
 
-// S'il y a des artiles stockés dans LocalStorageyy
-if(articleStockeDansLocalstorage){
-    articleStockeDansLocalstorage.push(articlePanier);
-    localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage))
-}
-// Sinon
-else{
-    articleStockeDansLocalstorage = [];
-    articleStockeDansLocalstorage.push(articlePanier);
-    localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage));
+    // ------------------------------Local Storage--------------------------------------
+    // Stocker les données de l'article dans le localstorage avec JSON.parse
+    let articleStockeDansLocalstorage = JSON.parse(localStorage.getItem("article"));
+
+    // Créer un popup de confirmation
+    let popupConfirmation = () =>{
+        if(window.confirm("'idArticleSelectionne.name' option: 'choixCouleur' a bien été mis dans le panier Consulter le panier OK ou revenir à laccueil ANNULER" )) {
+        window.location.href = "panier.html";
+        }
+        else {
+            window.location.href = "index.html";
+        }
+    }
+
+    // S'il y a des artiles stockés dans LocalStorageyy
+    if(articleStockeDansLocalstorage){
+        articleStockeDansLocalstorage.push(articlePanier);
+        localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage))
+    }
+    // Sinon
+    else{
+        articleStockeDansLocalstorage = [];
+        articleStockeDansLocalstorage.push(articlePanier);
+        localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage));
+        console.log(articleStockeDansLocalstorage);
+    }
     console.log(articleStockeDansLocalstorage);
-}
-console.log(articleStockeDansLocalstorage);
 
 })
 
