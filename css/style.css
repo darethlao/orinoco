@@ -3573,6 +3573,10 @@ body {
   padding-left: 0;
 }
 
+.container-fluid {
+  padding: 0;
+}
+
 .navbar-light .navbar-toggler {
   color: black;
   border-color: #f3e9f1;
@@ -3591,6 +3595,32 @@ body {
 #bloc-2 .icon-md {
   color: #FFFFFF !important;
   font-size: 30px;
+}
+
+#bloc-libelle-panier {
+  font-size: 0.8rem;
+}
+#bloc-libelle-panier .text_en_suspension {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#bloc-articles-panier {
+  font-size: 0.8rem;
+}
+#bloc-articles-panier .text_en_suspension {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#total-commande .row .col {
+  font-size: 0.8rem;
+}
+
+#total-commande .row .col h5 {
+  font-size: 0.8rem;
 }
 
 /*# sourceMappingURL=style.css.map */

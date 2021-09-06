@@ -20,22 +20,19 @@ console.log(articleSelectionne1);
 
 // Code HTML pour l'affichage de l'article sélectionné
 let prototype1 = `  <div class="col-12 col-lg-3">
-                        <div class="card">
+
                     </div>
-                    </div><div class="col-12 col-lg-3">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <a class="imageArticles" href="produit.html">
-                                    <img src="${idArticleSelectionne.imageUrl}" height="200" >
-                                </a>
-                                <h3 class="card-title">${idArticleSelectionne.name}
-                                </h3>
-                            </div>
+                    </div><div class="col-12 col-lg-3 md-mx-0">
+                        <div class="text-center">
+                            <a class="imageArticles" href="produit.html">
+                                <img src="${idArticleSelectionne.imageUrl}" height="200" >
+                            </a>
+                            <h3 class="card-title">${idArticleSelectionne.name}
+                            </h3>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
+                        <div class="text-center">
                             <h5><strong>${idArticleSelectionne.description}</strong>
                             </h5>
                             <BR/>
@@ -44,13 +41,10 @@ let prototype1 = `  <div class="col-12 col-lg-3">
                             <BR/>
                             <h3><strong>${idArticleSelectionne.price / 100} € </strong>
                             </h3>
-                        </div>
+                        </div>                    
                     </div>
-                </div>
-                <div class="col-12 col-lg-3">
-                    <div class="card">
-                    </div>
-                </div>`;
+                    <div class="col-12 col-lg-3">
+                    </div>`;
 
 // Injecter la code HTML dans produit.html
 articleSelectionne1.innerHTML+=prototype1;
@@ -61,31 +55,23 @@ console.log(articleSelectionne2);
 
 // Code HTML pour l'affichage de l'article sélectionné
 let prototype2 = ` <div class="col-12 col-lg-3">
-                        <div class="card">
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card-body text-center">
+                            <h5>Je personnalise sa couleur
+                            </h5>
+                            <form>
+                                <select id="couleurs" size="1">
+                                </select>
+                            </form>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h5>Je personnalise sa couleur
-                                </h5>
-                                <form>
-                                    <select id="couleurs" size="1">
-                                    </select>
-                                </form>
-                            </div>
+                        <div id="btn-envoyer" class="card-body text-center">
+                            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Je mets dans mon panier</a>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
-                        <div class="card h-100">
-                            <div id="btn-envoyer" class="card-body text-center">
-                                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Je mets dans mon panier</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <div class="card">
-                        </div>
                     </div>`;
 
 

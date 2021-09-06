@@ -8,11 +8,11 @@ console.log(articleSelectionne3);
 
 // Afficher si le panier est vide
 if (articleStockeDansLocalstorage === null) {
-    let panierVide = '<div class="container-panier-vide my-4">\
-        <h4 style="color: red; text-align: center"> Mon panier est vide :( </h4>\
-    </div>\
-    ';
-    articleSelectionne3.innerHTML = panierVide;
+let panierVide = '<div class="container-panier-vide my-4">\
+    <h4 style="color: red; text-align: center"> Mon panier est vide :( </h4>\
+</div>\
+';
+articleSelectionne3.innerHTML = panierVide;
 
 // Afficher les articles sélectionnés si le panier n'est pas vide
 } else {
@@ -20,21 +20,21 @@ if (articleStockeDansLocalstorage === null) {
     for (let j = 0; j < articleStockeDansLocalstorage.length; j++) {
         structureArticlesDansPanier = structureArticlesDansPanier + `
         <div class="row">
-            <div class="col-4 md-1">
+            <div class="col col-sm-4">
             </div>
-            <div class="col bg-white">
+            <div class="col-3 col-sm">
                 <strong>${articleStockeDansLocalstorage[j].modele}</strong>
             </div>
-            <div class="col bg-white">
+            <div class="col-2 col-sm text_en_suspension">
                 ${articleStockeDansLocalstorage[j].couleur}
             </div>
-            <div class="col bg-white text-center">
+            <div class="col-2 col-sm text-center">
                 ${articleStockeDansLocalstorage[j].quantit}
             </div>
-            <div class="col bg-white text-center">    
+            <div class="col-2 col-sm text-center">    
                 ${articleStockeDansLocalstorage[j].prix} €
             </div>
-            <div class="col-4  md-1">
+            <div class="col col-sm-4">
             </div>
         </div>
     `;
@@ -43,9 +43,6 @@ if (articleStockeDansLocalstorage === null) {
     articleSelectionne3.innerHTML = structureArticlesDansPanier;
 }
 
-// Créer un bouton suppression d'un article
-
-
 // Afficher le total des quantités commandées et des prix
 let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
@@ -53,7 +50,7 @@ let totalQuantite = []
 for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
     let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantit;
     totalQuantite.push(quantiteArticlesDansPanier)
-    }
+}
 let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
 let calculQuantiteTotal = totalQuantite.reduce(quantites);
 console.log(calculQuantiteTotal);
@@ -62,33 +59,32 @@ let totalPrix = []
 for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
     let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
     totalPrix.push(prixArticlesDansPanier)
-    }
+}
 let prix = (accumulator, currentvalue) => accumulator + currentvalue;
 let calculPrixTotal = totalPrix.reduce(prix);
 console.log(calculPrixTotal);
 let totalCommande = `<div id="bloc-libelle-panier" class="col">
     <div class="row">
-        <div class="col-4">
+        <div class="col col-sm-4">
         </div>
-        <div class="col bg-white">
+        <div class="col-3 col-sm py-4">
         </div>
-        <div class="col bg-white  py-4" style="text-decoration-line:underline">
+        <div class="col-2 col-sm py-4" style="text-decoration-line:underline">
             <strong>TOTAL</strong>
         </div>
-        <div class="col bg-white text-center py-4">
+        <div class="col-2 col-sm text-center py-4">
         <h5>${calculQuantiteTotal}</h5>
         </div>
-        <div class="col bg-white text-center py-4">    
+        <div class="col-2 col-sm text-center py-4">    
             <h5>${calculPrixTotal} €</h5>
         </div>
-        <div class="col-4">
+        <div class="col col-sm-4">
         </div>
     </div>
 </div>
 `;
 // Injecter la code HTML dans panier.html
 articleSelectionne4.innerHTML=totalCommande;
-
 
 // Sélectionner l'identifiant où je vais mettre le code HTML pour l'option couleur et le bouton
 let articleSelectionne5 = document.querySelector("#formulaire");
@@ -98,15 +94,14 @@ console.log(articleSelectionne5);
 let prototype3 = `<!-- bouton de confirmation de commande-->
 <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
     <div class="col ">
-        <h5>Je complète le formulaire ci-dessous
-            <br/> avant de confirmer ma commande
+        <h5>Je complète mon formulaire ci-dessous
+            <br/> pour confirmer ma commande
         </h5>
     </div>
 </div>
-<div id="formulaire" class="row text-center">
-</div>
 <!-- Formulaire -->
-<div class="col" style="background:rgb(243, 233, 241);">
+<div class="row text-center" style="background:rgb(243, 233, 241);">
+    <div class="col ">
         <form>
             <select id="civilite">
                 <option value="0">Civilité</option>
@@ -135,8 +130,7 @@ let prototype3 = `<!-- bouton de confirmation de commande-->
 articleSelectionne5.innerHTML=prototype3;
 
 // Récupérer les coordonnées du client quand il clique sur le bouton "!je valide mes coordonnées" 
-document.getElementById("formulaire").addEventListener("submit", function(e) {
-
+document.getEprototype3lementById("formulaire").addEventListener("submit", function(e) {
     let erreur;
 
     // Récupérer tous les inputs

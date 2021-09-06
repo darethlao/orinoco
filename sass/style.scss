@@ -1,7 +1,7 @@
 @import "_et-line.scss";
 @import "_font-awesome.scss";
 
-// Prendre toute la hauteur et la largeur de 'élément dans son ensemble
+// Prendre toute la hauteur et la largeur de l'élément dans son ensemble
 * {
   box-sizing: border-box;
 }
@@ -15,6 +15,10 @@ body {
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0;
+}
+
+.container-fluid{
+  padding: 0;
 }
 
 // Rendre visible l'icône de navigation
@@ -37,4 +41,34 @@ body {
       color: #FFFFFF !important;
       font-size: 30px;
   }
+}
+
+// --------------------- Panier.html --------------------------
+
+// Ajouter 3 petits points après un texte qui dépasse
+#bloc-libelle-panier {
+  font-size: 0.8rem;
+  .text_en_suspension {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+#bloc-articles-panier {
+  font-size: 0.8rem;
+  .text_en_suspension {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// Réduire la taille Sde police 
+#total-commande .row .col{
+  font-size: 0.8rem;
+}
+
+#total-commande .row .col h5{
+  font-size: 0.8rem;
 }
