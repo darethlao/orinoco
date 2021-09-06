@@ -21,6 +21,11 @@ body {
   padding: 0;
 }
 
+// Définir une hauteur minimale pour le body
+#bloc-1 {
+  min-height: 500px;
+}
+
 // Rendre visible l'icône de navigation
 .navbar-light .navbar-toggler {
   color: black;

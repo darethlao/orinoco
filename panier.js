@@ -130,7 +130,7 @@ let prototype3 = `<!-- bouton de confirmation de commande-->
 articleSelectionne5.innerHTML=prototype3;
 
 // Récupérer les coordonnées du client quand il clique sur le bouton "!je valide mes coordonnées" 
-document.getEprototype3lementById("formulaire").addEventListener("submit", function(e) {
+document.getElementById("formulaire").addEventListener("submit", function(e) {
     let erreur;
 
     // Récupérer tous les inputs
@@ -147,7 +147,6 @@ document.getEprototype3lementById("formulaire").addEventListener("submit", funct
         return false;
     } else {
         alert('Ma commande est validée !');
-        
     }
 
     // Retourner si un document n'est pas rempli
