@@ -65,20 +65,20 @@ let calculQuantiteTotal = totalQuantite.reduce(quantites);
 console.log(calculQuantiteTotal);
 // Calculer le total des prix
 function prixTotal(){
-let totalPrix = []
-for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
-    let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
-    totalPrix.push(prixArticlesDansPanier)
-}
-let prix = (accumulator, currentvalue) => accumulator + currentvalue;
-let calculPrixTotal = totalPrix.reduce(prix);
-console.log(calculPrixTotal);
-    if(calculPrixTotal !== null) {
-        return calculPrixTotal
-    } else {
-        return false
+    let totalPrix = []
+    for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
+        let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
+        totalPrix.push(prixArticlesDansPanier)
     }
-}
+    let prix = (accumulator, currentvalue) => accumulator + currentvalue;
+    let calculPrixTotal = totalPrix.reduce(prix);
+    console.log(calculPrixTotal);
+        if(calculPrixTotal !== null) {
+            return calculPrixTotal
+        } else {
+            return false
+        }
+    }
 let calculPrixTotal = prixTotal()
 let totalCommande = `<div id="bloc-libelle-panier" class="col">
     <div class="row">
