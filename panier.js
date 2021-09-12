@@ -19,7 +19,7 @@ articleSelectionne3.innerHTML = panierVide;
     structureArticlesDansPanier = [];
     for (let j = 0; j < articleStockeDansLocalstorage.length; j++) {
         structureArticlesDansPanier = structureArticlesDansPanier + `
-        <div class="row">
+        <div id="articles_panier" class="row">
             <div class="col col-sm-4">
             </div>
             <div class="col-3 col-sm">
@@ -29,26 +29,30 @@ articleSelectionne3.innerHTML = panierVide;
                 ${articleStockeDansLocalstorage[j].couleur}
             </div>
             <div class="col-2 col-sm text-center">
-                ${articleStockeDansLocalstorage[j].quantit}
+                ${articleStockeDansLocalstorage[j].quantite}
             </div>
             <div class="col-2 col-sm text-center">    
                 ${articleStockeDansLocalstorage[j].prix} €
             </div>
             <div class="col col-sm-4">
+                <button class="btn-supprimer fa fa-trash-o" id-article-supprime="${articleStockeDansLocalstorage[j].reference}"></button>
             </div>
         </div>
     `;
     }
-    // Injecter la code HTML dans panier.html
+//    if (j == articleStockeDansLocalstorage.length) {
+    // Injecter le code HTML dans panier.html
     articleSelectionne3.innerHTML = structureArticlesDansPanier;
+//    }
 }
 
-// Afficher le total des quantités commandées et des prix
+// ---------------------------Total quantité et prix ---------------------------
+// Afficher le al des quantités commandées et des prix
 let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
 let totalQuantite = []
 for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
-    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantit;
+    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantite;
     totalQuantite.push(quantiteArticlesDansPanier)
 }
 let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
@@ -78,18 +82,56 @@ let totalCommande = `<div id="bloc-libelle-panier" class="col">
         <div class="col-2 col-sm text-center py-4">    
             <h5>${calculPrixTotal} €</h5>
         </div>
-        <div class="col col-sm-4">
+        <div class="col col-sm-2 py-4">
+            <button class="btn-vider-panier fa fa-trash"> vider le panier</button>
+        </div>
+        <div class="col col-sm-2">
         </div>
     </div>
 </div>
 `;
-// Injecter la code HTML dans panier.html
+// Injecter le code HTML dans panier.html
 articleSelectionne4.innerHTML=totalCommande;
 
 // Sélectionner l'identifiant où je vais mettre le code HTML pour l'option couleur et le bouton
 let articleSelectionne5 = document.querySelector("#formulaire");
 console.log(articleSelectionne5);
 
+// ------------------------ Supprimer un article ---------------------------
+// Ecouter les id des articles à supprimer
+let btn_supprimer = document.querySelectorAll(".btn-supprimer");
+console.log(btn_supprimer);
+document.body.addEventListener("click", function(event) {
+    if (event.target.classList.contains("btn-supprimer")){
+        console.log(event.target);
+        let id_a_supprimer = event.target.getAttribute("id-article-supprime");
+        console.log(id_a_supprimer)
+        // Supprimer avec filter
+        articleStockeDansLocalstorage = articleStockeDansLocalstorage.filter(
+        el => el.reference !== id_a_supprimer);
+        console.log(articleStockeDansLocalstorage);
+        // Mettre dans le local storage
+        localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage));
+        // Avertir que l'article est supprimé
+        alert("Cet article est supprimé du panier");
+        window.location.href = "panier.html";
+    }
+})
+
+// ------------------------- Vider le panier ----------------------------------
+// Sélectionner l'id du bouton "btn_vider_panier"
+let btn_vider_panier = document.querySelector(".btn-vider-panier");
+console.log(btn_vider_panier);
+
+// Supprimer l'id de l'article supprimé du local storage
+btn_vider_panier.addEventListener('click', (e)=> {
+    e.preventDefault();
+    localStorage.removeItem("article");
+    alert("Le panier a été vidé");
+    window.location.href = "panier.html";
+})
+
+// ------------------------------ Formulaire -------------------------------------
 // Créer le formulaire pour les coordonnées du client
 let prototype3 = `<!-- bouton de confirmation de commande-->
 <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
@@ -126,7 +168,7 @@ let prototype3 = `<!-- bouton de confirmation de commande-->
 </div>
 `;
 
-// Injecter la code HTML dans produit.html
+// Injecter le code HTML dans produit.html
 articleSelectionne5.innerHTML=prototype3;
 
 // Récupérer les coordonnées du client quand il clique sur le bouton "!je valide mes coordonnées" 
@@ -146,7 +188,7 @@ document.getElementById("formulaire").addEventListener("submit", function(e) {
         document.getElementById("erreur").innerHTML = erreur;
         return false;
     } else {
-        alert('Ma commande est validée !');
+        alert('Ma commande est confirmée !');
     }
 
     // Retourner si un document n'est pas rempli

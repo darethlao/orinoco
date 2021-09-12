@@ -1,8 +1,16 @@
 // Récupérer l'id de l'article dans l'URL
-let parsedUrl = new URL(window.location.href);
-console.log(parsedUrl)
-let id = parsedUrl.searchParams.get("id");
-console.log(id);
+function recupereIdUrl(){
+    let parsedUrl = new URL(window.location.href);
+    console.log(parsedUrl)
+    let id = parsedUrl.searchParams.get("id");
+    console.log(id);
+    if(id !== null) {
+        return id
+    } else {
+        return false
+    }
+}
+let id = recupereIdUrl()
 
 // Aller chercher la base articles dans l'API Teddies
 fetch("http://localhost:3000/api/teddies/" + id)
@@ -20,7 +28,6 @@ console.log(articleSelectionne1);
 
 // Code HTML pour l'affichage de l'article sélectionné
 let prototype1 = `  <div class="col-12 col-lg-3">
-
                     </div>
                     </div><div class="col-12 col-lg-3 md-mx-0">
                         <div class="text-center">
@@ -46,7 +53,7 @@ let prototype1 = `  <div class="col-12 col-lg-3">
                     <div class="col-12 col-lg-3">
                     </div>`;
 
-// Injecter la code HTML dans produit.html
+// Injecter le code HTML dans produit.html
 articleSelectionne1.innerHTML+=prototype1;
 
 // Sélectionner l'identifiant où je vais mettre le code HTML pour l'option couleur et le bouton
@@ -75,9 +82,10 @@ let prototype2 = ` <div class="col-12 col-lg-3">
                     </div>`;
 
 
-// Injecter la code HTML dans produit.html
+// Injecter le code HTML dans produit.html
 articleSelectionne2.innerHTML+=prototype2;
 
+// ------------------ Options couleurs de l'article ---------------------------------
 // Adapter la fenêtre défilante aux nombre d'options de l'article
 let nombreOptions = idArticleSelectionne.colors;
 let structureOptions = [];
@@ -92,7 +100,7 @@ console.log(structureOptions);
 // Sélectionner l'identifiant où je vais mettre le code HTML pour les options couleurs
 let articleSelectionne3 = document.querySelector("#couleurs");
 console.log(articleSelectionne3);
-// Injecter la code HTML pour le choix des options
+// Injecter le code HTML pour le choix des options
 articleSelectionne3.innerHTML = structureOptions;
 
 // ------------------ Gestion du panier ----------------------------------
@@ -114,19 +122,27 @@ mettreDansLePanier.addEventListener("click", (event)=>{
         modele: idArticleSelectionne.name,
         reference: idArticleSelectionne._id,
         couleur: choixCouleur,
-        quantit: 1,
+        quantite: 1,
         prix: idArticleSelectionne.price / 100
     }
     // Afficher les données de l'article sélectionné
     console.log(articlePanier);
 
+    // Test
+    let a = null;
+    console.log(a);
+    console.log(Boolean(a));
+
     // ------------------------------Local Storage--------------------------------------
     // Stocker les données de l'article dans le localstorage avec JSON.parse
     let articleStockeDansLocalstorage = JSON.parse(localStorage.getItem("article"));
+    console.log(articleStockeDansLocalstorage);
 
     // Créer un popup de confirmation
     let popupConfirmation = () =>{
-        if(window.confirm("'idArticleSelectionne.name' option: 'choixCouleur' a bien été mis dans le panier Consulter le panier OK ou revenir à laccueil ANNULER" )) {
+        if(window.confirm(`L'ours ${idArticleSelectionne.name} avec la couleur ${choixCouleur} a bien été mis dans le panier
+Consulter le panier en cliquant sur "OK"
+ou revenir à l'accueil en cliquant sur "Annuler"`)) {
         window.location.href = "panier.html";
         }
         else {
@@ -138,6 +154,7 @@ mettreDansLePanier.addEventListener("click", (event)=>{
     if(articleStockeDansLocalstorage){
         articleStockeDansLocalstorage.push(articlePanier);
         localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage))
+        popupConfirmation();
     }
     // Sinon
     else{
@@ -145,10 +162,11 @@ mettreDansLePanier.addEventListener("click", (event)=>{
         articleStockeDansLocalstorage.push(articlePanier);
         localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage));
         console.log(articleStockeDansLocalstorage);
+        popupConfirmation(); 
     }
     console.log(articleStockeDansLocalstorage);
 
-})
 
+})
 });
 
