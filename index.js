@@ -19,6 +19,7 @@ function recupererTousArticles() {
                 <h3 class="card-title">' + articles.name + '</h3>\
             </div>\
       </div>';
+      // Injecter le code HTML dans panier.html
       container.innerHTML+=prototype;
       console.log(container.childElementCount)
     })
