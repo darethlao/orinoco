@@ -146,7 +146,44 @@ btn_vider_panier.addEventListener('click', (e)=> {
 
 // ------------------------------ Formulaire -------------------------------------
 // Créer le formulaire pour les coordonnées du client
-let prototype3 = `<!-- bouton de confirmation de commande-->
+    let formulaireCompletee = document.querySelector("#formulaire");
+//     let sctructureFormulaire =`<!-- bouton de confirmation de commande-->
+// <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
+//     <div class="col ">
+//         <h5>Je complète mon formulaire ci-dessous
+//             <br/> pour confirmer ma commande
+//         </h5>
+//     </div>
+// </div>
+// <!-- Formulaire -->
+// <div class="row text-center" style="background:rgb(243, 233, 241);">
+//     <div class="col ">
+//         <form>
+//             <select id="civilite">
+//                 <option value="0">Civilité</option>
+//                 <option value="1">Madame</option>
+//                 <option value="2">Monsieur</option>
+//             </select>
+//             <input type="text" name="nom" placeholder="Mon nom" maxlength="50" id="nom">
+//             <br/>
+//             <input type="text" name="prénom" placeholder="Mon prénom" maxlength="50" id="prenom">
+//             <br/>
+//             <input type="email" name="email" placeholder="Mon email" maxlength="50" id="email">
+//             <br/>
+//             <input type="text" name="adresse" placeholder="Mon adresse" maxlength="50" id="adresse">
+//             <br/>
+//             <input type="text" name="ville" placeholder="Ma ville" maxlength="50" id="ville">
+//             <br/>
+//             <button id:"envoyerFormulaire" class="btn btn-primary" type="submit" name="Je confirme ma commande">
+//             </button>
+//         </form>
+//         <p style="color: red;" id="erreur"></p>
+//     </div>
+// </div>
+// `;
+
+    let afficherFormulaire = document.querySelector("formulaire");
+    let sctructureFormulaire =`<!-- bouton de confirmation de commande-->
 <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
     <div class="col ">
         <h5>Je complète mon formulaire ci-dessous
@@ -158,47 +195,113 @@ let prototype3 = `<!-- bouton de confirmation de commande-->
 <div class="row text-center" style="background:rgb(243, 233, 241);">
     <div class="col ">
         <form>
-            <select id="civilite">
-                <option value="0">Civilité</option>
-                <option value="1">Madame</option>
-                <option value="2">Monsieur</option>
-            </select>
-            <input type="text" name="nom" placeholder="Mon nom" maxlength="50" id="nom">
+            <label for="nom">Nom:</label>
+            <input type="text" id="lastname" name="nom" placeholder="Mon nom" maxlength="50" required>
             <br/>
-            <input type="text" name="prénom" placeholder="Mon prénom" maxlength="50" id="prenom">
+            <label for="prenom">Prénom:</label>
+            <input type="text" id="firstname" name="prenom" placeholder="Mon prénom" maxlength="50" required>
             <br/>
-            <input type="email" name="email" placeholder="Mon email" maxlength="50" id="email">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Mon email" maxlength="50" required>
             <br/>
-            <input type="text" name="adresse" placeholder="Mon adresse" maxlength="50" id="adresse">
+            <label for="adresse">Adresse:</label>
+            <input type="text" id="address" name="adresse" placeholder="Mon adresse" maxlength="50" required>
             <br/>
-            <input type="text" name="ville" placeholder="Ma ville" maxlength="50" id="ville">
+            <label for="ville">Ville:</label>
+            <input type="text" id="city" name="ville" placeholder="Ma ville" maxlength="50" required>
             <br/>
-            <input type="submit" value="Je confirme ma commande">              
+            <button class="envoyerFormulaire btn btn-primary" type="submit" name="envoyerFormulaire">Je confirme ma commande
+            </button>
         </form>
-
         <p style="color: red;" id="erreur"></p>
     </div>
 </div>
 `;
-// Injecter le code HTML dans produit.html
-articleSelectionne5.innerHTML=prototype3;
+// Injecter le code HTML dans panier.html
+formulaireCompletee.innerHTML=sctructureFormulaire;
+console.log(formulaireCompletee);
+
+// Ecouter le click des valeurs du formulaires à envoyer
+let btnEnvoyerFormulaire = document.querySelector(".envoyerFormulaire");
+btnEnvoyerFormulaire.addEventListener("click", (e)=>{
+    e.preventDefault();
+    // Récupérer les valeurs du formulaire
+    let valeursFormulaire = {
+        lastname: document.querySelector("#lastname").value,
+        firstname: document.querySelector("#firstname").value,
+        email: document.querySelector("#email").value,
+        address: document.querySelector("#address").value,
+        city: document.querySelector("#city").value
+    }
+
+    // Mettre les valeurs du formulaire dans le local storage
+    localStorage.setItem("valeursFormulaire", JSON.stringify(valeursFormulaire));
+
+    // Mettre les valeurs du formulaire et les produits sélectionnés dans un objet à envoyer dans le serveur
+    let aEnvoyer = {
+        articleStockeDansLocalstorage,
+        valeursFormulaire
+    }
+    console.log(aEnvoyer);
+
+    // Envoyer l'objet vers le serveur
+    let promise1 = fetch("http://localhost:3000/api/teddies/order",{
+        method: "POST",
+        body: JSON.stringify(aEnvoyer),
+        headers: {
+            "Content-Type" : "application/json",
+        },
+    });
+    console.log(promise1);
+});
+
+// Mettre le contenu du local storage dans les champs du formulaire
+// Mettre la clé du local storage dans une variable
+let ValeursFormulaireLocalStorage = JSON.parse(localStorage.getItem("valeursFormulaire"));
+console.log(ValeursFormulaireLocalStorage);
+
+// Mettre les valeurs du formulaire du local storage dans les champs du formulaire
+function valeursFormulaireLocalStorage(){
+    document.querySelector(`#${input}`).value = ValeursFormulaireLocalStorage[input];
+    valeursFormulaireLocalStorage("nom");
+    valeursFormulaireLocalStorage("prenom");
+    valeursFormulaireLocalStorage("email");
+    valeursFormulaireLocalStorage("adresse");
+    valeursFormulaireLocalStorage("ville");
+}
+
+
 
 // Récupérer les coordonnées du client quand il clique sur le bouton "je valide mes coordonnées" 
-document.getElementById("formulaire").addEventListener("submit", function(e) {
-    let erreur;
+// document.getElementById("formulaire").addEventListener("submit", function(e) {
+//     let erreur;
     // Récupérer tous les inputs
-    let inputs = document.getElementsByTagName("input");
-    for (let i = 0; i < inputs.length; i++) {
-        if (!inputs[i].value) {
-            erreur = "J'ai oublié de renseigner tous les champs";
-        }
-    }
-    if (erreur) {
-        e.preventDefault();
-        document.getElementById("erreur").innerHTML = erreur;
-        return false;
-    }
-    else {
-        alert('Ma commande est confirmée !');
-    }
-})
+    // let inputs = document.getElementsByTagName("input");
+    // for (let i = 0; i < inputs.length; i++) {
+    //     if (!inputs[i].value) {
+    //         erreur = "J'ai oublié de renseigner tous les champs";
+    //     }
+    // }
+    // if (erreur) {
+    //     e.preventDefault();
+    //     document.getElementById("erreur").innerHTML = erreur;
+    //     return false;
+    // }
+    // else {
+    //     alert('Ma commande est confirmée !');
+    // }
+// })
+
+// Sélectionner le bouton envoyer le formulaire
+// let btnEnvoyerFomulaire = document.querySelector("#envoyerFormulaire");
+// Récupérer les coordonnées du client quand il clique sur le bouton envoyer le formulaire 
+// btnEnvoyerFomulaire.addEventListerner("click", ()=>{
+//     localStorage.setItem("nom", document.querySelector("#nom").value);
+// console.log(document.querySelector("#nom").value);
+// })
+
+// ------------------------------Local Storage--------------------------------------
+// Stocker les données de l'article dans le localstorage avec JSON.parse
+// let formulaireStockeDansLocalstorage = JSON.parse(localStorage.getItem("formulaire"));
+// console.log(formulaireStockeDansLocalstorage);
+
