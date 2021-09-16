@@ -27,16 +27,16 @@ else {
                 <div class="col col-sm-4">
                 </div>
                 <div class="col-3 col-sm">
-                    <strong>${articleStockeDansLocalstorage[j].modele}</strong>
+                    <strong>${articleStockeDansLocalstorage[j].name}</strong>
                 </div>
                 <div class="col-2 col-sm text_en_suspension">
-                    ${articleStockeDansLocalstorage[j].couleur}
+                    ${articleStockeDansLocalstorage[j].color}
                 </div>
                 <div class="col-2 col-sm text-center">
-                    ${articleStockeDansLocalstorage[j].quantite}
+                    ${articleStockeDansLocalstorage[j].quantity}
                 </div>
                 <div class="col-2 col-sm text-center">    
-                    ${articleStockeDansLocalstorage[j].prix} €
+                    ${articleStockeDansLocalstorage[j].price} €
                 </div>
                 <div class="col col-sm-4">
                     <button class="btn-supprimer fa fa-trash-o" id-article-supprime="${articleStockeDansLocalstorage[j].reference}"></button>
@@ -57,7 +57,7 @@ let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
 let totalQuantite = []
 for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
-    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantite;
+    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantity;
     totalQuantite.push(quantiteArticlesDansPanier)
 }
 let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
@@ -67,7 +67,7 @@ console.log(calculQuantiteTotal);
 function prixTotal(){
     let totalPrix = []
     for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
-        let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
+        let prixArticlesDansPanier = articleStockeDansLocalstorage[l].price;
         totalPrix.push(prixArticlesDansPanier)
     }
     let prix = (accumulator, currentvalue) => accumulator + currentvalue;
@@ -237,11 +237,31 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
     // Mettre les valeurs du formulaire dans le local storage
     localStorage.setItem("valeursFormulaire", JSON.stringify(valeursFormulaire));
 
+    // Récupérer les id des produits du panier
+    let articles = [];
+    for (idListe of articleStockeDansLocalstorage) {
+        articles.push(idListe.id);
+        console.log(articles);
+    } 
+
     // Mettre les valeurs du formulaire et les produits sélectionnés dans un objet à envoyer dans le serveur
+    // let tesProduitsString = articleStockeDansLocalstorage.id
+    // let tesProduitsString = articleStockeDansLocalstorage.toString()
+    // console.log(tesProduitsString);
     let aEnvoyer = {
-        articleStockeDansLocalstorage,
-        valeursFormulaire
+        contact: {
+            firstName: valeursFormulaire.firstname,
+            lastName: valeursFormulaire.lastname,
+            address: valeursFormulaire.address,
+            city: valeursFormulaire.city,
+            email: valeursFormulaire.email,
+        },
+        products: articles
     }
+    // let aEnvoyer = {
+    //     articleStockeDansLocalstorage,
+    //     valeursFormulaire
+    // }
     console.log(aEnvoyer);
 
     // Envoyer l'objet vers le serveur
@@ -253,22 +273,54 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
         },
     });
     console.log(promise1);
+
+    let promise2 = fetch("http://localhost:3000/api/teddies/");
+    promise2.then((response) => response.json())
+                .then((data) => {
+                    localStorage.setItem("order", JSON.stringify(data));
+                    document.location.href = "confirmation.html";
+                })
+                .catch((erreur) => console.log("erreur : " + erreur));
+
+
+    // Récupérer les valeurs du serveur
+    // promise1.then( async () => {
+    // try {
+    //     console.log(response);
+    //     let contenu = await response.json();
+    //     console.log(contenu);
+    // } catch (e) {
+    //     console.log(e);
+    // }
+    // })
+
+    
+    // let promise2 = fetch("http://localhost:3000/api/teddies/");
+    // promise2.then( async (response) => {
+    //     try {
+    //         consol.log(response);
+    //         let utilisateur = await response.json();
+    //         console.log(utilisateur);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }   
+    // })
 });
 
 // Mettre le contenu du local storage dans les champs du formulaire
 // Mettre la clé du local storage dans une variable
-let ValeursFormulaireLocalStorage = JSON.parse(localStorage.getItem("valeursFormulaire"));
-console.log(ValeursFormulaireLocalStorage);
+// let ValeursFormulaireLocalStorage = JSON.parse(localStorage.getItem("valeursFormulaire"));
+// console.log(ValeursFormulaireLocalStorage);
 
 // Mettre les valeurs du formulaire du local storage dans les champs du formulaire
-function valeursFormulaireLocalStorage(){
-    document.querySelector(`#${input}`).value = ValeursFormulaireLocalStorage[input];
-    valeursFormulaireLocalStorage("nom");
-    valeursFormulaireLocalStorage("prenom");
-    valeursFormulaireLocalStorage("email");
-    valeursFormulaireLocalStorage("adresse");
-    valeursFormulaireLocalStorage("ville");
-}
+// function valeursFormulaireLocalStorage(){
+//     document.querySelector(`#${input}`).value = ValeursFormulaireLocalStorage[input];
+//     valeursFormulaireLocalStorage("nom");
+//     valeursFormulaireLocalStorage("prenom");
+//     valeursFormulaireLocalStorage("email");
+//     valeursFormulaireLocalStorage("adresse");
+//     valeursFormulaireLocalStorage("ville");
+// }
 
 
 

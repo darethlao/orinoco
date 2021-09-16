@@ -123,11 +123,11 @@ fetch("http://localhost:3000/api/teddies/" + id)
 
             // Récupérer les données de l'article à mettre dans le panier
             let articlePanier = {
-                modele: idArticleSelectionne.name,
-                reference: idArticleSelectionne._id,
-                couleur: choixCouleur,
-                quantite: 1,
-                prix: idArticleSelectionne.price / 100
+                name: idArticleSelectionne.name,
+                id: idArticleSelectionne._id,
+                color: choixCouleur,
+                quantity: 1,
+                price: idArticleSelectionne.price / 100
             }
             // Afficher les données de l'article sélectionné
             console.log(articlePanier);

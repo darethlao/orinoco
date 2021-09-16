@@ -1,6 +1,22 @@
+// Récupérer les articles et les articles commandées du server
+const url = ` http://localhost:3000/api/teddies/order`;
+const panier = JSON.parse(localStorage.getItem("order")) || [];
+console.log(url);
+console.log(panier);
+
 // Récupérer les données des articles du panier dans le localStorage
 let articleStockeDansLocalstorage = JSON.parse(localStorage.getItem("article"));
 console.log(articleStockeDansLocalstorage);
+
+// --------------------------Numéro de commande -------------------------------
+let numeroCommande = document.querySelector("#numero-commande");
+let numeroCommandeHtml = `<h5>Votre commande ci-dessous est bien confirmée sous le numéro</h5>
+<h5><strong>numéro de commande</strong></h5>
+<h4 style="color: blueviolet"><strong>Merci et à bientôt :)</strong></h4>
+<br/>
+`;
+// Injecter le code HTML dans panier.html
+numeroCommande.innerHTML=numeroCommandeHtml;
 
 // --------------- Affichage des produits du panier --------------------------
 let articleSelectionne3 = document.querySelector("#bloc-articles-panier");
@@ -27,16 +43,16 @@ else {
                 <div class="col col-sm-4">
                 </div>
                 <div class="col-3 col-sm">
-                    <strong>${articleStockeDansLocalstorage[j].modele}</strong>
+                    <strong>${articleStockeDansLocalstorage[j].name}</strong>
                 </div>
                 <div class="col-2 col-sm text_en_suspension">
-                    ${articleStockeDansLocalstorage[j].couleur}
+                    ${articleStockeDansLocalstorage[j].color}
                 </div>
                 <div class="col-2 col-sm text-center">
-                    ${articleStockeDansLocalstorage[j].quantite}
+                    ${articleStockeDansLocalstorage[j].quantity}
                 </div>
                 <div class="col-2 col-sm text-center">    
-                    ${articleStockeDansLocalstorage[j].prix} €
+                    ${articleStockeDansLocalstorage[j].price} €
                 </div>
                 <div class="col col-sm-4">
                 </div>
@@ -56,7 +72,7 @@ let articleSelectionne4 = document.querySelector("#total-commande");
 // Calculer le total des quantités commandées
 let totalQuantite = []
 for (let k = 0; k < articleStockeDansLocalstorage.length; k++) {
-    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantite;
+    let quantiteArticlesDansPanier = articleStockeDansLocalstorage[k].quantity;
     totalQuantite.push(quantiteArticlesDansPanier)
 }
 let quantites = (accumulator, currentvalue) => accumulator + currentvalue;
@@ -66,7 +82,7 @@ console.log(calculQuantiteTotal);
 function prixTotal(){
     let totalPrix = []
     for (let l = 0; l < articleStockeDansLocalstorage.length; l++) {
-        let prixArticlesDansPanier = articleStockeDansLocalstorage[l].prix;
+        let prixArticlesDansPanier = articleStockeDansLocalstorage[l].price;
         totalPrix.push(prixArticlesDansPanier)
     }
     let prix = (accumulator, currentvalue) => accumulator + currentvalue;
