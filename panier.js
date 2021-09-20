@@ -39,13 +39,13 @@ else {
                     ${articleStockeDansLocalstorage[j].price} €
                 </div>
                 <div class="col col-sm-4">
-                    <button class="btn-supprimer fa fa-trash-o" id-article-supprime="${articleStockeDansLocalstorage[j].reference}"></button>
+                    <button class="btn-supprimer fa fa-trash-o" id-article-supprime="${articleStockeDansLocalstorage[j].id}"></button>
                 </div>
             </div>
         `;
         }
         // Injecter le code HTML dans panier.html
-        articleSelectionne3.innerHTML = structureArticlesDansPanier;
+        articleSelectionne3.innerHTML=structureArticlesDansPanier;
         console.log(container.childElementCount);
     }
     recupererTousArticlesSelectionnes()
@@ -121,7 +121,7 @@ document.body.addEventListener("click", function(event) {
         console.log(id_a_supprimer)
         // Supprimer avec filter
         articleStockeDansLocalstorage = articleStockeDansLocalstorage.filter(
-        el => el.reference !== id_a_supprimer);
+        el => el.id !== id_a_supprimer);
         console.log(articleStockeDansLocalstorage);
         // Mettre dans le local storage
         localStorage.setItem("article", JSON.stringify(articleStockeDansLocalstorage));
@@ -147,42 +147,6 @@ btn_vider_panier.addEventListener('click', (e)=> {
 // ------------------------------ Formulaire -------------------------------------
 // Créer le formulaire pour les coordonnées du client
     let formulaireCompletee = document.querySelector("#formulaire");
-//     let sctructureFormulaire =`<!-- bouton de confirmation de commande-->
-// <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
-//     <div class="col ">
-//         <h5>Je complète mon formulaire ci-dessous
-//             <br/> pour confirmer ma commande
-//         </h5>
-//     </div>
-// </div>
-// <!-- Formulaire -->
-// <div class="row text-center" style="background:rgb(243, 233, 241);">
-//     <div class="col ">
-//         <form>
-//             <select id="civilite">
-//                 <option value="0">Civilité</option>
-//                 <option value="1">Madame</option>
-//                 <option value="2">Monsieur</option>
-//             </select>
-//             <input type="text" name="nom" placeholder="Mon nom" maxlength="50" id="nom">
-//             <br/>
-//             <input type="text" name="prénom" placeholder="Mon prénom" maxlength="50" id="prenom">
-//             <br/>
-//             <input type="email" name="email" placeholder="Mon email" maxlength="50" id="email">
-//             <br/>
-//             <input type="text" name="adresse" placeholder="Mon adresse" maxlength="50" id="adresse">
-//             <br/>
-//             <input type="text" name="ville" placeholder="Ma ville" maxlength="50" id="ville">
-//             <br/>
-//             <button id:"envoyerFormulaire" class="btn btn-primary" type="submit" name="Je confirme ma commande">
-//             </button>
-//         </form>
-//         <p style="color: red;" id="erreur"></p>
-//     </div>
-// </div>
-// `;
-
-    let afficherFormulaire = document.querySelector("formulaire");
     let sctructureFormulaire =`<!-- bouton de confirmation de commande-->
 <div class="row py-4 text-center" style="background:rgb(243, 233, 241);">
     <div class="col ">
@@ -221,10 +185,11 @@ btn_vider_panier.addEventListener('click', (e)=> {
 formulaireCompletee.innerHTML=sctructureFormulaire;
 console.log(formulaireCompletee);
 
-// Ecouter le click des valeurs du formulaires à envoyer
+// Ecouter le click du bouton "Je confirme ma commande"
 let btnEnvoyerFormulaire = document.querySelector(".envoyerFormulaire");
 btnEnvoyerFormulaire.addEventListener("click", (e)=>{
     e.preventDefault();
+    
     // Récupérer les valeurs du formulaire
     let valeursFormulaire = {
         lastname: document.querySelector("#lastname").value,
@@ -236,6 +201,7 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
 
     // Mettre les valeurs du formulaire dans le local storage
     localStorage.setItem("valeursFormulaire", JSON.stringify(valeursFormulaire));
+    localStorage.setItem("calculPrixTotal", JSON.stringify(calculPrixTotal));
 
     // Récupérer les id des produits du panier
     let articles = [];
@@ -245,9 +211,6 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
     } 
 
     // Mettre les valeurs du formulaire et les produits sélectionnés dans un objet à envoyer dans le serveur
-    // let tesProduitsString = articleStockeDansLocalstorage.id
-    // let tesProduitsString = articleStockeDansLocalstorage.toString()
-    // console.log(tesProduitsString);
     let aEnvoyer = {
         contact: {
             firstName: valeursFormulaire.firstname,
@@ -256,16 +219,14 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
             city: valeursFormulaire.city,
             email: valeursFormulaire.email,
         },
-        products: articles
+        products: articles,
+        calculPrixTotal
     }
-    // let aEnvoyer = {
-    //     articleStockeDansLocalstorage,
-    //     valeursFormulaire
-    // }
+
     console.log(aEnvoyer);
 
     // Envoyer l'objet vers le serveur
-    let promise1 = fetch("http://localhost:3000/api/teddies/order",{
+    const promise1 = fetch("http://localhost:3000/api/teddies/order",{
         method: "POST",
         body: JSON.stringify(aEnvoyer),
         headers: {
@@ -274,86 +235,36 @@ btnEnvoyerFormulaire.addEventListener("click", (e)=>{
     });
     console.log(promise1);
 
-    let promise2 = fetch("http://localhost:3000/api/teddies/");
+    // Voir le résultat du serveur dans la console
+    promise1.then(async(response)=>{
+        // Gérer les erreurs si la promesse n'est pas non résolue
+        try{
+            const contenu = await response.json();
+            console.log(contenu);
+            if(response.ok){
+                console.log(`Résultat de response.ok : ${response.ok}`);
+                //Récupération de l'id de la response du serveur
+                console.log(contenu.orderId);
+                // Mettre l'id dans le local storage
+                localStorage.setItem("responseId", contenu.orderId)
+            } else {
+                console.log(`Réponse du serveur : ${response.status}`);
+                alert(`Problème avec le serveur : erreur ${response.status}`)
+            };
+        }catch(e){
+            articleStockeDansLocalstorage.log("Erreur qui vient du cacth() ");
+            console.log(e);
+            alert(`Erreur qui vient du cacth() $(e)`);
+        }
+    })
+
+    let promise2 = fetch("http://localhost:3000/api/teddies/order");
     promise2.then((response) => response.json())
                 .then((data) => {
                     localStorage.setItem("order", JSON.stringify(data));
+                    // Aller vers la page confirmation.html
                     document.location.href = "confirmation.html";
                 })
                 .catch((erreur) => console.log("erreur : " + erreur));
 
-
-    // Récupérer les valeurs du serveur
-    // promise1.then( async () => {
-    // try {
-    //     console.log(response);
-    //     let contenu = await response.json();
-    //     console.log(contenu);
-    // } catch (e) {
-    //     console.log(e);
-    // }
-    // })
-
-    
-    // let promise2 = fetch("http://localhost:3000/api/teddies/");
-    // promise2.then( async (response) => {
-    //     try {
-    //         consol.log(response);
-    //         let utilisateur = await response.json();
-    //         console.log(utilisateur);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }   
-    // })
-});
-
-// Mettre le contenu du local storage dans les champs du formulaire
-// Mettre la clé du local storage dans une variable
-// let ValeursFormulaireLocalStorage = JSON.parse(localStorage.getItem("valeursFormulaire"));
-// console.log(ValeursFormulaireLocalStorage);
-
-// Mettre les valeurs du formulaire du local storage dans les champs du formulaire
-// function valeursFormulaireLocalStorage(){
-//     document.querySelector(`#${input}`).value = ValeursFormulaireLocalStorage[input];
-//     valeursFormulaireLocalStorage("nom");
-//     valeursFormulaireLocalStorage("prenom");
-//     valeursFormulaireLocalStorage("email");
-//     valeursFormulaireLocalStorage("adresse");
-//     valeursFormulaireLocalStorage("ville");
-// }
-
-
-
-// Récupérer les coordonnées du client quand il clique sur le bouton "je valide mes coordonnées" 
-// document.getElementById("formulaire").addEventListener("submit", function(e) {
-//     let erreur;
-    // Récupérer tous les inputs
-    // let inputs = document.getElementsByTagName("input");
-    // for (let i = 0; i < inputs.length; i++) {
-    //     if (!inputs[i].value) {
-    //         erreur = "J'ai oublié de renseigner tous les champs";
-    //     }
-    // }
-    // if (erreur) {
-    //     e.preventDefault();
-    //     document.getElementById("erreur").innerHTML = erreur;
-    //     return false;
-    // }
-    // else {
-    //     alert('Ma commande est confirmée !');
-    // }
-// })
-
-// Sélectionner le bouton envoyer le formulaire
-// let btnEnvoyerFomulaire = document.querySelector("#envoyerFormulaire");
-// Récupérer les coordonnées du client quand il clique sur le bouton envoyer le formulaire 
-// btnEnvoyerFomulaire.addEventListerner("click", ()=>{
-//     localStorage.setItem("nom", document.querySelector("#nom").value);
-// console.log(document.querySelector("#nom").value);
-// })
-
-// ------------------------------Local Storage--------------------------------------
-// Stocker les données de l'article dans le localstorage avec JSON.parse
-// let formulaireStockeDansLocalstorage = JSON.parse(localStorage.getItem("formulaire"));
-// console.log(formulaireStockeDansLocalstorage);
-
+})
